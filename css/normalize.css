@@ -1,0 +1,135 @@
+:root {
+    --bg: rgb(239, 243, 242);
+    --black: rgba(0, 0, 0,);
+    --blackTransp: rgba(0, 0, 0,0.4);
+    --grey: rgb(140, 140, 140);       
+    --white: rgb(255, 255, 255);
+    --color: rgb(247, 80, 75);
+    --color1: rgb(79, 92, 202);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+ul {
+    list-style-type: none;
+}
+  
+a {
+    text-decoration: none;
+    color: var(--black);
+}
+
+a:visited {    
+    color: var(--black)
+}
+
+html {
+    line-height: 1.15;
+    -webkit-text-size-adjust: 100%; 
+}
+
+body {
+    font-family: "Roboto", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+}
+
+button,
+input,
+optgroup,
+select,
+textarea {
+  font-family: inherit;
+  font-size: 100%;
+  line-height: 1.15;
+  margin: 0;
+}
+
+button,
+input {
+  overflow: visible;
+  border: 1px solid var(--grey);
+  border-radius: 10px;
+  padding: 5px;
+  transition: ease-in-out;
+}
+
+button:hover {
+    cursor: pointer;
+    opacity: 0.95;
+    color: var(--blackTransp);
+}
+
+button:active {
+    transform: translateY(2px);
+}
+
+p {
+    margin-bottom: 0;
+    font-size: 1em;
+}
+
+input,
+textarea,
+select {
+  margin: 0;
+  font-size: 1em;
+  line-height: 1.15;
+  padding: 0.5em 0.75em;
+  border-radius: 4px;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin-top: 0;
+}
+
+b,
+strong {
+  font-weight: bolder;
+}
+
+::-moz-focus-inner {
+    border-style: none;
+    padding: 0;
+}
+
+:-moz-focusring {
+    outline: 1px dotted ButtonText;
+}
+
+textarea {
+    overflow: auto;
+}
+
+audio,
+video {
+  display: inline-block;
+}
+
+hr {
+    margin: 0;
+    border: 0;
+    height: 1px;
+}
+
+img {
+    border: 0;
+    border-style: none;
+}
+
+details {
+    display: block;
+}
+
+summary {
+    display: list-item;
+}

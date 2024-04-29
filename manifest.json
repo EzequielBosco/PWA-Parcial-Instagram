@@ -1,0 +1,33 @@
+{
+    "name": "Minstareel",
+    "short_name": "Minstareel",
+    "description": "Aplicación Web Progresiva Minstareel",
+    "icons": [
+        {
+            "src": "img/logo-512.jpg",
+            "type": "image/png",
+            "sizes": "512x512"
+        },
+        {
+            "src": "img/logo-192.jpg",
+            "type": "image/png",
+            "sizes": "192x192"
+        },
+       {
+        "src": "img/logo-144.png",
+        "type": "image/png",
+        "sizes": "144x144"
+        },
+        {
+            "src": "img/logo-64.png",
+            "type": "image/png",
+            "sizes": "64x64"
+        }
+    ],
+    "start_url": "/",
+    "orientation": "portrait",
+    "background_color": "#00008B",
+    "display": "standalone",
+    "scope": "/",
+    "theme_color": "#3367D6"
+}
