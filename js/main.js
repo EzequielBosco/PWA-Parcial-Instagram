@@ -3,10 +3,28 @@ const post = {
     userImage: "img/perfil.jpg",
     image: "img/post.jpg",
     title: "Nueva publicacion",
-    description: "..."
+    description: "...",
+    date: new Date()
 }
 
+const posts = []
+
+const btnSubir = document.getElementById("btn-subir")
+btnSubir.addEventListener('click', function() {
+    AgregarPost(post)
+})
+
+function AgregarPost(newPost) {
+    console.log(posts)
+    posts.push(newPost)
+    cargarPosts(posts)
+}
+
+// Card -----------------------------------------------------------------------
+
 function crearCardHTML(post) {
+    const formattedDate = formatFecha(post.date)
+
     return  `<article class="card">
                 <header>
                     <image src="${post.userImage}" alt="Imagen de usuario" title="Imagen de ${post.username}"></image>
@@ -20,18 +38,27 @@ function crearCardHTML(post) {
                     </div>
                     <hr>
                     <h2>${post.title}<h2>
+                    <p>Fecha de creación: ${formattedDate}</p>
                     <p>Descripción: ${post.description}</p>
                 </div>           
             </article>`
 }
 
-const divContenedor = document.querySelector(".posts")
-
-function cargarPosts(post) {
-    divContenedor.innerHTML += crearCardHTML(post)
+function formatFecha(fecha) {
+    const options = { year: 'numeric', month: 'long', day: 'numeric', hour: 'numeric', minute: 'numeric', second: 'numeric', hour12: false }
+    return fecha.toLocaleDateString('es-ES', options)
 }
 
-cargarPosts(post)
+const divContenedor = document.querySelector(".posts")
+
+function cargarPosts(posts) {
+    divContenedor.innerHTML = "" 
+    posts.forEach(post => {
+        divContenedor.innerHTML += crearCardHTML(post)
+    })
+}
+
+cargarPosts(posts)
 
 const btnInicio = document.getElementById('btn-inicio')
 btnInicio.addEventListener('click', function(e) {

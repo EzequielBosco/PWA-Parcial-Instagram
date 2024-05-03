@@ -6,6 +6,11 @@
     width: 80%;
     margin: 0 auto;
     padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 2rem;
 }
 
 hr {
@@ -59,8 +64,15 @@ article {
 
 /*Footer*/
 footer {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
     text-align: center;
     padding: 1rem;
+    border-top: 1px solid var(--blackTransp);
+    background-color: var(--color);
+    z-index: 15;
+    color: var(--white);
 }
 
 
@@ -119,6 +131,10 @@ article {
 section.camara {
     padding: 0;
     margin-bottom: 1.5rem;
+    display: flex;
+    justify-content: center;
+    gap: 25px;
+    align-items: center;
 }
 
 /* Media Queries */
