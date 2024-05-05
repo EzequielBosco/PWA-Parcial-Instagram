@@ -30,13 +30,18 @@ header img {
     width: 50px;
 }
 
-/*Nav*/
+#header-hr {
+    border: 1px solid var(--color);
+    margin: 0 100px;
+}
+
+/* Nav ------------------------------------- */
 nav {
     display: flex;
     justify-content: center;
     align-items: center;
     padding: 1rem 20rem;
-    margin-bottom: 3rem;
+    margin: 2rem 0;
 }
 
 /*Main*/
@@ -75,9 +80,12 @@ footer {
     color: var(--white);
 }
 
+footer em {
+    color: var(--grey);
+}
 
 
-/* Cards */
+/* Cards ----------------------------------- */
 article {
     border: 1px solid var(--grey);
     background-color: var(--black);
@@ -88,6 +96,13 @@ article {
     margin-bottom: 20px;
     display: flex;
     flex-direction: column;
+    transition: 0.2s ease-in-out;
+    background-color: var(--white);
+}
+
+.card:hover {
+    box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.2);
+    transform: translateY(5px);
 }
 
 .card header {
@@ -127,6 +142,10 @@ article {
     gap: 10px;
 }
 
+.card:last-child {
+    margin-bottom: 150px;
+}
+
 /* Boton Camara */
 section.camara {
     padding: 0;
@@ -137,7 +156,42 @@ section.camara {
     align-items: center;
 }
 
-/* Media Queries */
+.camara #btn-foto {
+    width: 100px;
+    background-color: var(--color);
+    color: var(--white);
+    padding: 1px 1px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: 0.2s ease-in-out;
+}
+
+.camara #btn-foto:hover {
+    transform: scale(1.1);
+}
+
+
+/* Formulario ------------------------------ */
+
+#capturar-camara {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+    width: 100%;
+    min-height: 550px;
+    height: 100%;
+    background-color: var(--white);
+    color: var(--blackTransp);
+    cursor: pointer;
+}
+#capturar-camara h2 {
+    user-select: none;
+}
+
+/* Media Queries --------------------------- */
+
 @media (min-width: 1025px) {
     .container {
         width: 70%;
@@ -233,6 +287,10 @@ section.camara {
     img {
         width: 80%;
     }
+
+    footer img {
+        width: 50px;
+    }
 }
 
 @media (max-width: 480px) {
@@ -246,5 +304,9 @@ section.camara {
 
     img {
         width: 100%;
+    }
+
+    .card:last-child {
+        margin-bottom: 180px;
     }
 }

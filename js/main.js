@@ -1,4 +1,5 @@
-const post = {
+const defaultPost = {
+    id: 1,
     username: "Username",
     userImage: "img/perfil.jpg",
     image: "img/post.jpg",
@@ -11,7 +12,7 @@ const posts = []
 
 const btnSubir = document.getElementById("btn-subir")
 btnSubir.addEventListener('click', function() {
-    AgregarPost(post)
+    AgregarPost(defaultPost)
 })
 
 function AgregarPost(newPost) {
@@ -53,12 +54,31 @@ const divContenedor = document.querySelector(".posts")
 
 function cargarPosts(posts) {
     divContenedor.innerHTML = "" 
-    posts.forEach(post => {
-        divContenedor.innerHTML += crearCardHTML(post)
-    })
+    if (posts.length > 0) {
+        posts.forEach(post => {
+            divContenedor.innerHTML += crearCardHTML(post)
+        })
+    } else {
+        divContenedor.innerHTML = retornarCardError()
+    }
 }
 
 cargarPosts(posts)
+
+function retornarCardError() {
+    return `                
+        <p>Intenta nuevamente en unos segundos...</p>
+        <h3>Los posteos deberían verse así ⬇</h3>
+        <div>
+            <article class="card">
+                <header>
+                    <image src="${defaultPost.userImage}" alt="Imagen de usuario" title="Imagen de ${defaultPost.username}"></image>
+                    <h3>Username</h3>
+                </header>
+                <image class="post-img" src="${defaultPost.image}" alt="Imagen de posteo" title="Imagen de posteo"></image>
+            </article>
+        </div>`
+}
 
 const btnInicio = document.getElementById('btn-inicio')
 btnInicio.addEventListener('click', function(e) {
