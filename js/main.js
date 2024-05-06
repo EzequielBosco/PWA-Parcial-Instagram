@@ -9,6 +9,7 @@ const defaultPost = {
 }
 
 const posts = []
+const URLposts = "https://66388ba94253a866a24e2e86.mockapi.io/api/parcial/posts"
 
 const btnSubir = document.getElementById("btn-subir")
 btnSubir.addEventListener('click', function() {
@@ -16,7 +17,6 @@ btnSubir.addEventListener('click', function() {
 })
 
 function AgregarPost(newPost) {
-    console.log(posts)
     posts.push(newPost)
     cargarPosts(posts)
 }
@@ -31,11 +31,10 @@ function crearCardHTML(post) {
                     <image src="${post.userImage}" alt="Imagen de usuario" title="Imagen de ${post.username}"></image>
                     <h3>${post.username}</h3>
                 </header>
-                <image class="post-img" src="${post.image}" alt="Imagen de posteo" title="Imagen de posteo"></image>
+                <image class="post-img" src="${post.imagePost}" alt="Imagen de posteo" title="Imagen de posteo"></image>
                 <div class="card-footer">
                     <div class="cards-buttons">
                         <button>❤️</button>
-                        <button>💬</button>
                     </div>
                     <hr>
                     <h2>${post.title}<h2>
@@ -46,6 +45,9 @@ function crearCardHTML(post) {
 }
 
 function formatFecha(fecha) {
+    if (!(fecha instanceof Date)) {
+        fecha = new Date(fecha)
+    }
     const options = { year: 'numeric', month: 'long', day: 'numeric', hour: 'numeric', minute: 'numeric', second: 'numeric', hour12: false }
     return fecha.toLocaleDateString('es-ES', options)
 }
@@ -69,13 +71,31 @@ function retornarCardError() {
 
 const divContenedor = document.querySelector(".posts")
 
-function cargarPosts(posts) {
-    divContenedor.innerHTML = "" 
-    if (posts.length > 0) {
-        posts.forEach(post => {
-            divContenedor.innerHTML += crearCardHTML(post)
+async function cargarPosts() {
+    try {
+        const response = await fetch(URLposts)
+        if (!response.ok) {
+            throw new Error("No se pueden obtener los posts del servidor.")
+        }
+
+        const data = await response.json()
+        posts.length = 0
+        posts.push(...data)
+        if (posts.length > 0) {
+            divContenedor.innerHTML = ""
+            posts.forEach(post => {
+                divContenedor.innerHTML += crearCardHTML(post)
+            })
+        } else {
+            divContenedor.innerHTML = retornarCardError()
+        }
+    } catch (error) {
+        ToastIt.now({
+            message: "Error al obtener los posts",
+            style: 'error',
+            timer: 3700,
+            close: true
         })
-    } else {
         divContenedor.innerHTML = retornarCardError()
     }
 }

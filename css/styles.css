@@ -1,4 +1,5 @@
 @import url("normalize.css");
+@import url("toastitv1.0.css");
 
 /* Estructura */
 
@@ -50,7 +51,7 @@ main {
     display: flex;
     justify-content: center;
     align-items: center;
-    padding-bottom: 0;
+    padding-bottom: 2rem;
 }
 
 /*Section*/
@@ -359,7 +360,6 @@ section.camara {
 
     main {
         justify-content: start;
-        padding-bottom: 2rem;
     }
 
     #capturar-camara {
