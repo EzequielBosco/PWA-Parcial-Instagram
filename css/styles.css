@@ -83,6 +83,11 @@ footer {
 
 footer em {
     color: var(--grey);
+    transition: 0.2s ease-in-out;
+}
+
+footer em:hover {
+    color: var(--black);
 }
 
 
@@ -147,6 +152,11 @@ article {
     margin-bottom: 150px;
 }
 
+.liked {
+    color: red; 
+    background-color: pink;
+}
+
 /* Boton Camara */
 section.camara {
     padding: 0;
@@ -193,6 +203,8 @@ section.camara {
 #capturar-camara p {
     user-select: none;
     font-size: 14px;
+    margin-left: 23px;
+    color: var(--color);
 }
 
 #imagen-capturada, #imagen-post {
@@ -201,9 +213,9 @@ section.camara {
     width: 100%;
     height: auto;
     object-fit: cover;
+    max-width: 100px;
     display: none;
-    max-width: 300px;
-    max-height: 300px;
+    max-height: 100px;
     z-index: 15;
 }
 
@@ -375,6 +387,10 @@ section.camara {
     .form-group label {
         font-size: 0.9rem;
     }
+
+    #header-hr {
+        margin: 0 35px;
+    }
 }
 
 @media (max-width: 480px) {
@@ -392,5 +408,9 @@ section.camara {
 
     .card:last-child {
         margin-bottom: 180px;
+    }
+
+    #header-hr {
+        margin: 0 25px;
     }
 }

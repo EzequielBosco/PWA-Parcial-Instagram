@@ -11,20 +11,27 @@ const defaultPost = {
 const posts = []
 const URLposts = "https://66388ba94253a866a24e2e86.mockapi.io/api/parcial/posts"
 
-const btnSubir = document.getElementById("btn-subir")
-btnSubir.addEventListener('click', function() {
-    AgregarPost(defaultPost)
+const btnCargar = document.getElementById("btn-cargar")
+btnCargar.addEventListener('click', function() {
+    cargarPosts()
+    ToastIt.now({
+        message: "Posts actualizados",
+        style: 'success',
+        timer: 3000,
+    })
 })
 
-function AgregarPost(newPost) {
-    posts.push(newPost)
-    cargarPosts(posts)
-}
+const btnInicio = document.getElementById('btn-inicio')
+btnInicio.addEventListener('click', function(e) {
+    e.preventDefault()
+    window.location.href = ''
+})
 
 // Card -----------------------------------------------------------------------
 
 function crearCardHTML(post) {
     const formattedDate = formatFecha(post.date)
+    const postId = `post-${post.id}`
 
     return  `<article class="card">
                 <header>
@@ -34,11 +41,11 @@ function crearCardHTML(post) {
                 <image class="post-img" src="${post.imagePost}" alt="Imagen de posteo" title="Imagen de posteo"></image>
                 <div class="card-footer">
                     <div class="cards-buttons">
-                        <button>❤️</button>
+                        <button id="${postId}-heart">❤️</button>
                     </div>
                     <hr>
                     <h2>${post.title}<h2>
-                    <p>Fecha de creación: ${formattedDate}</p>
+                    <p>${formattedDate}</p>
                     <p>Descripción: ${post.description}</p>
                 </div>           
             </article>`
@@ -81,10 +88,28 @@ async function cargarPosts() {
         const data = await response.json()
         posts.length = 0
         posts.push(...data)
+
+        // Ordenamiento por fecha de manera descendente
+        posts.sort((a, b) => new Date(b.date) - new Date(a.date))
+
         if (posts.length > 0) {
             divContenedor.innerHTML = ""
             posts.forEach(post => {
-                divContenedor.innerHTML += crearCardHTML(post)
+                const cardHTML = crearCardHTML(post)
+                divContenedor.innerHTML += cardHTML
+            })
+
+            posts.forEach(post => {
+                const postId = `#post-${post.id}-heart`;
+                const heartButton = document.querySelector(postId)
+
+                if (heartButton) { 
+                    heartButton.addEventListener('click', function() {
+                        heartButton.classList.toggle('liked')
+                    })
+                } else {
+                    console.error(`No se encontró un botón de corazón con el ID ${postId}`)
+                }
             })
         } else {
             divContenedor.innerHTML = retornarCardError()
@@ -102,8 +127,26 @@ async function cargarPosts() {
 
 cargarPosts(posts)
 
-const btnInicio = document.getElementById('btn-inicio')
-btnInicio.addEventListener('click', function(e) {
-    e.preventDefault()
-    window.location.href = ''
-})
+
+// Filtro de búsqueda ---------------------------------------------------------
+
+const filtroBusqueda = document.getElementById("search-input")
+
+function filtrarProductos() {
+    const valorFiltro = filtroBusqueda.value.toLowerCase()
+
+    const resultado = posts.filter((post) => {
+        return post.title.toLowerCase().includes(valorFiltro)
+    })
+
+    if (resultado.length > 0) {
+        divContenedor.innerHTML = ""
+        resultado.forEach(post => {
+            divContenedor.innerHTML += crearCardHTML(post)
+        })
+    } else {
+        divContenedor.innerHTML = "<p>No se encontraron resultados</p>"
+    }
+}
+
+filtroBusqueda.addEventListener("keyup", filtrarProductos)

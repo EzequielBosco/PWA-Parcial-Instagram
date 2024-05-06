@@ -1,3 +1,5 @@
+const URLposts = "https://66388ba94253a866a24e2e86.mockapi.io/api/parcial/posts"
+
 // IMG USER CAMARA
 const btnCamara = document.querySelector('#capturar-camara')
 const textoDiv = document.querySelector('#texto')
@@ -37,13 +39,21 @@ btnPost.addEventListener("change", (event) => {
     }
 })
 
-function convertirImagenAbase64() {
+function convertirImagenAbase64(img) {
+    if (img == null) {
+        ToastIt.now({
+            message: "No hay imagen",
+            style: 'error',
+            timer: 3500,
+            close: true
+        })
+        throw new Error("No hay imagen para convertir")
+    }
     const canvas = document.createElement("canvas")
           canvas.width = imagen.width
           canvas.height = imagen.height
     const ctx = canvas.getContext("2d")
           ctx.drawImage(imagen, 0, 0, imagen.width, imagen.height)
-          // document.querySelector("body").appendChild(canvas)
           return canvas.toDataURL("image/jpeg")    
 }
 
@@ -57,11 +67,15 @@ const btnGuardar = document.querySelector("#btn-subir-post")
 
 btnGuardar.addEventListener("click", (e) => {
     e.preventDefault()
-    if (inputNombreUsuario.value.trim() === "" || inputTitulo.value.trim() === "" || imagePost.src === "" || inputDescription.value.trim() === "") {
+
+    const img = document.querySelector("img#imagen-capturada")
+    const imgPost = document.querySelector("img#imagen-post")
+
+    if (inputNombreUsuario.value.trim() === "" || inputTitulo.value.trim() === "" || imagePost.src === "http://127.0.0.1:5500/camara.html" || inputDescription.value.trim() === "" || imagen.src === "http://127.0.0.1:5500/camara.html") {
         ToastIt.now({
             message: "Complete todos los campos",
             style: 'error',
-            timer: 3700,
+            timer: 3500,
             close: true
         })
         return
@@ -69,14 +83,12 @@ btnGuardar.addEventListener("click", (e) => {
 
     const nuevoPost = {
         username: inputNombreUsuario.value.trim(),
-        userImage: imagen.src,
+        userImage: convertirImagenAbase64(img),
         title: inputTitulo.value.trim(),
-        imagePost: imagePost.src,
+        imagePost: convertirImagenAbase64(imgPost),
         description: inputDescription.value.trim(),
         date: new Date()
     }
-
-    console.log(nuevoPost)
 
     const opciones = {
         method: 'POST',
@@ -89,14 +101,20 @@ btnGuardar.addEventListener("click", (e) => {
         if (response.status === 201) {
             return response.json()
         } else {
-            throw new Error("No se puede crear el recurso.")
+            throw new Error("No se puede crear el post.")
         }
     })
-    .then((data)=> {
-        cargarPosts()
-        inputCodigo.value = data.id
+    .then(()=> {
+        ToastIt.now({
+            message: 'Post creado correctamente!',
+            style: 'success',
+            timer: 2500,
+        })
+        setTimeout(() => {
+            window.location.href = 'index.html'
+        }, 2500)
     })
-    .catch(()=> {
+    .catch((error)=> {
         ToastIt.now({
             message: error.message,
             style: 'error',
@@ -109,13 +127,8 @@ btnGuardar.addEventListener("click", (e) => {
         inputNombreUsuario.value = ""
         inputTitulo.value = ""
         inputDescription.value = ""
-        imagen.src = ""
-        imagen.style.display = "none"
-        imagePost.src = ""
-        imagePost.style.display = "none"
         textoDiv.style.display = "block"
         btnCamara.style.maxHeight = "200px"
         btnCamara.style.maxWidth = "200px"
-        window.location.href = ''
     }, 3000)
 })
