@@ -50,21 +50,6 @@ function formatFecha(fecha) {
     return fecha.toLocaleDateString('es-ES', options)
 }
 
-const divContenedor = document.querySelector(".posts")
-
-function cargarPosts(posts) {
-    divContenedor.innerHTML = "" 
-    if (posts.length > 0) {
-        posts.forEach(post => {
-            divContenedor.innerHTML += crearCardHTML(post)
-        })
-    } else {
-        divContenedor.innerHTML = retornarCardError()
-    }
-}
-
-cargarPosts(posts)
-
 function retornarCardError() {
     return `                
         <p>Intenta nuevamente en unos segundos...</p>
@@ -79,6 +64,23 @@ function retornarCardError() {
             </article>
         </div>`
 }
+
+// Cargar posts ----------------------------------------------------------------
+
+const divContenedor = document.querySelector(".posts")
+
+function cargarPosts(posts) {
+    divContenedor.innerHTML = "" 
+    if (posts.length > 0) {
+        posts.forEach(post => {
+            divContenedor.innerHTML += crearCardHTML(post)
+        })
+    } else {
+        divContenedor.innerHTML = retornarCardError()
+    }
+}
+
+cargarPosts(posts)
 
 const btnInicio = document.getElementById('btn-inicio')
 btnInicio.addEventListener('click', function(e) {

@@ -19,7 +19,41 @@
         <h1 class="logo-nombre">Minstareel Camara</h1>
     </header>
     <main>
-        <div id="capturar-camara" title="Capturar imagen"><h2>Capturar Imagen</h2></div>
+        <div>
+            <h2>Completa para publicar el post</h2>
+            <form autocomplete="off" id="form-camara">
+                <div id="form-preview">
+                    <div class="form-group">
+                        <label for="capturar-imagen">Imagen usuario</label>
+                        <div id="capturar-camara" title="Capturar imagen">
+                            <p id="texto">Capturar imagen usuario</p>
+                            <img id="imagen-capturada" src="" alt="Imagen usuario capturada" title="Imagen usuario capturada" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="form-autor">Autor</label>
+                        <input type="text" id="form-autor" placeholder="Autor del post">
+                    </div>
+                    <div class="form-group">
+                        <label for="form-file">Imagen post</label>
+                        <input type="file" accept="image/*" id="form-file">
+                        <img id="imagen-post" src="" alt="Imagen post" title="Imagen post" />
+                    </div>
+                    <div class="form-group">
+                        <label for="form-title">Titulo</label>
+                        <input type="text" id="form-title" placeholder="Titulo del post">
+                    </div>
+                    <div class="form-group">
+                        <label for="form-text">Descripción</label>
+                        <textarea id="form-text" rows="5" placeholder="Descripción del post"></textarea>
+                    </div>
+                </div>
+                <div id="form-buttons">
+                    <button type="submit">Cancelar</button>
+                    <button type="submit">Enviar</button>
+                </div>
+            </form>
+        </div>
     </main>
 </body>
 </html>

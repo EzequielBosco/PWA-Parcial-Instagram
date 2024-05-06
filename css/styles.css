@@ -31,7 +31,7 @@ header img {
 }
 
 #header-hr {
-    border: 1px solid var(--color);
+    border: 1px solid var(--blackTransp);
     margin: 0 100px;
 }
 
@@ -178,16 +178,73 @@ section.camara {
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 10px;
-    width: 100%;
-    min-height: 550px;
-    height: 100%;
-    background-color: var(--white);
+    width: 100px;
+    height: 100px;
+    max-width: 100px;
+    max-height: 100px;
+    background-image: url("../img/perfil.jpg");
+    background-size: cover;
+    background-color: var(--back);
     color: var(--blackTransp);
     cursor: pointer;
+    overflow: hidden;
 }
-#capturar-camara h2 {
+#capturar-camara p {
     user-select: none;
+    font-size: 14px;
+}
+
+#imagen-capturada, #imagen-post {
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    display: none;
+    max-width: 300px;
+    max-height: 300px;
+    z-index: 15;
+}
+
+#form-camara {
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 1rem;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    margin: 15px 0;
+}
+
+.form-group:first-child {
+    margin-top: 0;
+}
+
+.form-group label {
+    font-size: 1.05rem;
+}
+.form-group input[type="file"] {
+    cursor: pointer;
+}
+
+#form-preview {
+    border: 1px solid var(--blackTransp);
+    border-radius: 10px;
+    padding: 15px;
+    background-color: var(--white);
+}
+
+#form-buttons {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
 }
 
 /* Media Queries --------------------------- */
@@ -290,6 +347,33 @@ section.camara {
 
     footer img {
         width: 50px;
+    }
+    
+    form {
+        max-width: 100px;
+    }
+
+    #form-preview {
+        max-width: 300px;
+    }
+
+    main {
+        justify-content: start;
+        padding-bottom: 2rem;
+    }
+
+    #capturar-camara {
+        max-width: 150px;
+        max-height: 150px;
+    }
+    
+    #imagen-capturada, #imagen-post {
+        max-width: 200px;
+        max-height: 200px;
+    }
+    
+    .form-group label {
+        font-size: 0.9rem;
     }
 }
 
