@@ -50,10 +50,10 @@ function convertirImagenAbase64(img) {
         throw new Error("No hay imagen para convertir")
     }
     const canvas = document.createElement("canvas")
-          canvas.width = imagen.width
-          canvas.height = imagen.height
+          canvas.width = img.width
+          canvas.height = img.height
     const ctx = canvas.getContext("2d")
-          ctx.drawImage(imagen, 0, 0, imagen.width, imagen.height)
+          ctx.drawImage(img, 0, 0, img.width, img.height)
           return canvas.toDataURL("image/jpeg")    
 }
 
@@ -71,7 +71,7 @@ btnGuardar.addEventListener("click", (e) => {
     const img = document.querySelector("img#imagen-capturada")
     const imgPost = document.querySelector("img#imagen-post")
 
-    if (inputNombreUsuario.value.trim() === "" || inputTitulo.value.trim() === "" || imagePost.src === "http://127.0.0.1:5500/camara.html" || inputDescription.value.trim() === "" || imagen.src === "http://127.0.0.1:5500/camara.html") {
+    if (inputNombreUsuario.value.trim() === "" || inputTitulo.value.trim() === "" || imgPost.src === "http://127.0.0.1:5500/camara.html" || inputDescription.value.trim() === "" || img.src === "http://127.0.0.1:5500/camara.html") {
         ToastIt.now({
             message: "Complete todos los campos",
             style: 'error',
